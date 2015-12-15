@@ -19,6 +19,7 @@ public class MainFrame extends JFrame {
         this.setLayout(new GridBagLayout());
         this.cont = new GridBagConstraints();
         this.cont.anchor = GridBagConstraints.NORTHWEST;
+        this.cont.fill = GridBagConstraints.BOTH;
 
         this.setLayout(new GridBagLayout());
 

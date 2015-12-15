@@ -37,6 +37,7 @@ public class NewFeedView extends JPanel implements ActionListener {
         this.setBorder(BorderFactory.createTitledBorder("Nouveau flux"));
         this.cont = new GridBagConstraints();
         this.cont.anchor = GridBagConstraints.NORTHWEST;
+        this.cont.fill = GridBagConstraints.BOTH;
 
         this.checkBtn = new JButton("Check");
         this.checkBtn.addActionListener(this);

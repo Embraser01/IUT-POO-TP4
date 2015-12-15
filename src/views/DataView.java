@@ -33,18 +33,23 @@ public class DataView extends JPanel implements ListSelectionListener, RSSUpdate
         this.setLayout(new GridBagLayout());
         this.cont = new GridBagConstraints();
         this.cont.anchor = GridBagConstraints.NORTHWEST;
+        this.cont.fill = GridBagConstraints.BOTH;
 
 
         this.listData = new JList(this.listModel);
         this.listData.addListSelectionListener(this);
+        this.listData.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.listDataScroll = new JScrollPane(this.listData);
         this.listDataScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.listDataScroll.setBorder(BorderFactory.createTitledBorder("Liste des articles"));
+        this.listDataScroll.setPreferredSize(new Dimension(1000,300));
 
 
-        this.desc = new JTextArea("");
+        this.desc = new JTextArea();
         this.desc.setBorder(BorderFactory.createTitledBorder("Description"));
-        this.desc.setSize(500, 150);
+        this.desc.setLineWrap(true);
+        this.desc.setWrapStyleWord(true);
+        this.desc.setPreferredSize( new Dimension(1000,80));
 
         this.cont.gridx = 0;
         this.cont.gridy = 0;

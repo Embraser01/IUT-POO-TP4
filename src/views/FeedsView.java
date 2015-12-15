@@ -33,6 +33,7 @@ public class FeedsView extends JPanel implements ActionListener, FeedsUpdateList
 
         this.feeds = new Feeds();
         this.feeds.addFeedsUpdateListener(this);
+
         this.feeds.addRSSFeed("http://lemonde.fr/m-actu/rss_full.xml");
 
 
@@ -40,10 +41,13 @@ public class FeedsView extends JPanel implements ActionListener, FeedsUpdateList
         this.setBorder(BorderFactory.createTitledBorder("Flux enregistrés"));
         this.cont = new GridBagConstraints();
         this.cont.anchor = GridBagConstraints.NORTHWEST;
+        this.cont.fill = GridBagConstraints.BOTH;
 
         this.listFeed = new JList(this.listModel);
+        this.listFeed.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.listFeedScroll = new JScrollPane(this.listFeed);
         this.listFeedScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        this.listFeedScroll.setPreferredSize(new Dimension(220,400));
 
         this.checkBtn = new JButton("Check");
         this.checkBtn.addActionListener(this);

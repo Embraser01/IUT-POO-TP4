@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
 
         this.feedsView = new FeedsView();
         this.dataView = new DataView();
-        this.newFeedView = new NewFeedView();
+        this.newFeedView = new NewFeedView(feedsView.getFeeds());
 
         this.feedsView.addRSSListener(this.dataView);
         this.newFeedView.addRSSListener(this.dataView);

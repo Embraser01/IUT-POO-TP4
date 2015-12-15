@@ -29,6 +29,7 @@ public class FeedsView extends JPanel implements ActionListener, FeedsUpdateList
 
     public FeedsView() {
         this.listener = null;
+        this.listModel = new DefaultListModel();
 
         this.feeds = new Feeds();
         this.feeds.addFeedsUpdateListener(this);
@@ -40,8 +41,6 @@ public class FeedsView extends JPanel implements ActionListener, FeedsUpdateList
         this.cont = new GridBagConstraints();
         this.cont.anchor = GridBagConstraints.NORTHWEST;
 
-
-        this.listModel = new DefaultListModel();
         this.listFeed = new JList(this.listModel);
         this.listFeedScroll = new JScrollPane(this.listFeed);
         this.listFeedScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -60,11 +59,8 @@ public class FeedsView extends JPanel implements ActionListener, FeedsUpdateList
     }
 
 
-    private void getNewFeedModel() {
-
-        for (RSSFeed feed = feeds.resetCursor(); feed != null; feed = feeds.next())
-            listModel.addElement(feed.toString());
-
+    public Feeds getFeeds() {
+        return feeds;
     }
 
     @Override

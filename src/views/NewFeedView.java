@@ -29,8 +29,9 @@ public class NewFeedView extends JPanel implements ActionListener {
     private GridBagConstraints cont;
 
 
-    public NewFeedView() {
+    public NewFeedView(Feeds feeds) {
         this.listener = null;
+        this.feeds = feeds;
 
         this.setLayout(new GridBagLayout());
         this.setBorder(BorderFactory.createTitledBorder("Nouveau flux"));
@@ -65,7 +66,7 @@ public class NewFeedView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == checkBtn && !urlField.getText().equals("")){
             listener.onRSSUpdate(new RSSFeed(urlField.getText()));
-        } else if (e.getSource() == saveBtn && urlField.getText().equals("")){
+        } else if (e.getSource() == saveBtn && !urlField.getText().equals("")){
             feeds.addRSSFeed(urlField.getText());
         }
     }

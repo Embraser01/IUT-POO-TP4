@@ -14,20 +14,65 @@ import java.util.List;
  */
 public class RSSFeed {
 
+    private static int count = 0;
+
+    private int _id;
+
+    private int next;
+
     private ArrayList<Data> rows;
+    private String title;
 
 
     private SAXBuilder builder = null;
     private String link = null;
 
     public RSSFeed(String link) {
+        this._id = count;
+        count++;
         this.link = link;
 
+        this.rows = new ArrayList<>();
+        this.next = 0;
+        this.title = "";
+
+        this.extract();
     }
+
+    public int get_id() {
+        return _id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Data searchByTitle(String title){
+        for (Data row : rows) if (row.getTitle().equals(title)) return row;
+        return null;
+    }
+
+    public Data resetCursor() {
+        next = 0;
+        if(rows.size() == 0)return null;
+
+        next++;
+        return rows.get(next - 1);
+    }
+
+    public Data next() {
+        if(next >= rows.size()) {
+            next = 0;
+            return null;
+        }
+        next++;
+        return rows.get(next - 1);
+    }
+
 
     public void extract() {
 
-        if(builder == null) builder = new SAXBuilder();
+        if (builder == null) builder = new SAXBuilder();
 
         rows = new ArrayList<>();
 
@@ -36,6 +81,7 @@ public class RSSFeed {
             Element rootNode = document.getRootElement();
 
             List list = rootNode.getChild("channel").getChildren("item");
+            this.title = rootNode.getChild("channel").getChildText("title");
 
             Element node = null;
             for (int i = 0; i < list.size(); i++) {
@@ -44,10 +90,7 @@ public class RSSFeed {
 
                 rows.add(new Data(node.getChildText("link"),
                         node.getChildText("title"),
-                        node.getChildText("description"),
-                        node.getChildText("pubDate"),
-                        node.getChildText("guid"),
-                        node.getChild("enclosure").getAttributeValue("url")));
+                        node.getChildText("description")));
             }
 
         } catch (IOException io) {
@@ -57,6 +100,7 @@ public class RSSFeed {
         }
     }
 
+
     public ArrayList<Data> getRows() {
         return rows;
     }
@@ -64,8 +108,6 @@ public class RSSFeed {
 
     @Override
     public String toString() {
-        return "RSSFeed{" +
-                "rows=" + rows +
-                '}';
+        return this.title;
     }
 }
